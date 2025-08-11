@@ -1,12 +1,13 @@
--- 🔹 Part A: Create normalized tables in 3NF
+DROP TABLE IF EXISTS Courses;
+DROP TABLE IF EXISTS Departments;
 
--- Create Departments table
+-- Part A: Create normalized tables (3NF)
+
 CREATE TABLE Departments (
     dept_id INT PRIMARY KEY,
-    dept_name VARCHAR(50) UNIQUE -- Ensure department names are not duplicated
+    dept_name VARCHAR(50) UNIQUE
 );
 
--- Create Courses table with Foreign Key
 CREATE TABLE Courses (
     course_id INT PRIMARY KEY,
     course_name VARCHAR(100),
@@ -14,9 +15,8 @@ CREATE TABLE Courses (
     FOREIGN KEY (dept_id) REFERENCES Departments(dept_id)
 );
 
--- 🔹 Part B: Insert sample data into both tables
+-- Part B: Insert sample data
 
--- Insert into Departments
 INSERT INTO Departments (dept_id, dept_name) VALUES
 (1, 'Computer Science'),
 (2, 'Electrical'),
@@ -24,7 +24,6 @@ INSERT INTO Departments (dept_id, dept_name) VALUES
 (4, 'Civil'),
 (5, 'Electronics');
 
--- Insert into Courses
 INSERT INTO Courses (course_id, course_name, dept_id) VALUES
 (101, 'DBMS', 1),
 (102, 'Operating Systems', 1),
@@ -37,7 +36,8 @@ INSERT INTO Courses (course_id, course_name, dept_id) VALUES
 (109, 'Embedded Systems', 5),
 (110, 'VLSI Design', 5);
 
--- 🔹 Part C: Subquery to find departments offering more than 2 courses
+-- Part C: Retrieve departments offering more than 2 courses
+
 SELECT dept_name
 FROM Departments
 WHERE dept_id IN (
